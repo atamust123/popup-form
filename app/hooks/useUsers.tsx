@@ -5,8 +5,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-export default function useUsers(setDeleteModal, setAddEditModal) {
-  const [currentUser, setCurrentUser] = useState();
+export default function useUsers(
+  setDeleteModal: (val: boolean) => void,
+  setAddEditModal: (val: boolean) => void
+) {
+  const [currentUser, setCurrentUser] = useState(null);
   const [actionUser, setActionUser] = useState(null);
   const [users, setUsers] = useState([]);
   const router = useRouter();
@@ -29,7 +32,7 @@ export default function useUsers(setDeleteModal, setAddEditModal) {
     axios
       .get("api/users")
       .then((res) => setUsers(res.data.data))
-      .catch("Unable to fetch user list");
+      .catch(() => toast.error("Unable to fetch user list"));
   };
 
   const handleAddUserButton = () => {
