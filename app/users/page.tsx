@@ -26,7 +26,6 @@ export default function UsersHome() {
         body={"User will be permanently deleted"}
         open={deleteModal}
         footer={footer}
-        opacity="60"
       />
       {addEditModal && (
         <UserModal
