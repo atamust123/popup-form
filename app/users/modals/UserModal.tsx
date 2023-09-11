@@ -8,6 +8,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { addUserSchema } from "../../libs/schema";
 import Form from "../../components/Form";
+import { Consent } from "../../components/Consent";
 /**
  *
  * @param mode  add|edit
@@ -47,13 +48,11 @@ export const UserModal = ({ mode, defaultValues, open, onHide }) => {
 
   const onSubmit = (data: FieldValues) => {
     setLoading(true);
-    console.log("Mode:", mode);
     mode === "add" ? addUser(data) : editUser(data);
   };
 
   const addUser = (data: FieldValues) => {
     const { name, password, role } = data || {};
-    console.log("data", data);
     axios
       .post("api/users", {
         name,
@@ -158,6 +157,7 @@ export const UserModal = ({ mode, defaultValues, open, onHide }) => {
               disabled: mode === "edit",
             }}
           />
+          <Consent name="consent" />
           <button className="button-1 typo-1" type="submit" disabled={loading}>
             {mode === "add" ? "Add" : "Edit"}
           </button>

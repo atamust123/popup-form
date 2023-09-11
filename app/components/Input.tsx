@@ -16,14 +16,16 @@ export const Input: React.FC<Input> = (props) => {
   const { control } = useFormContext();
   return (
     <>
-      <label className={`label-1 mb-3 ${disabled && "opacity-60"}`}>
+      <label
+        aria-labelledby={label}
+        className={`label-1 mb-3 ${disabled && "opacity-60"}`}
+      >
         {label}
       </label>
       <Controller
         control={control}
         name={name}
         render={({ field, fieldState: { error } }) => {
-          console.log(field.name, error);
           return (
             <div className="flex flex-col mb-6">
               <input
